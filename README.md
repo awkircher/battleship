@@ -8,7 +8,7 @@ The following test cases are meant to inform the actual unit tests written. Toge
 
 ### Ship spec
 * A position can only be hit once.
-* A ship with a length of 3 and exactly 3 hits is sunk.
+* A ship with a length of x and exactly x hits is sunk.
 
 ### Gameboard spec
 * Ships are created and placed in a letter column-numbered row coordinate system
