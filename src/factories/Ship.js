@@ -1,19 +1,19 @@
 // Returns an individual Ship object with methods.
-const Ship = function(length, uid) {
-    let positions = [];
-    // Initially all positions are not hit, so false.
+const Ship = function(type, length) {
+    let targets = [];
+    // Initially all targets are not hit, so false.
     for (let i = 0; i < length; i++) {
-        positions.push(false);
+        targets.push(false);
     } 
-    // These methods to be called if Gameboard finds an attack corresponds to a position.
+    // These methods to be called if Gameboard finds an attack corresponds to a target.
     const hit = function(index) {
-        positions[index] = true;
+        targets[index] = true;
     }
     const isSunk = function() {
-        const isPositionHit = (position) => position === true;
-        return positions.every(isPositionHit)
+        const isTargetHit = (target) => target === true;
+        return targets.every(isTargetHit)
     }
-    return {positions, uid, hit, isSunk}
+    return {type, targets, hit, isSunk}
 }
 
 export default Ship
