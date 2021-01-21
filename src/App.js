@@ -2,17 +2,18 @@ import Gameboard from './models/Gameboard'
 import Board from './views/Board';
 
 function App() {
-  const test = Gameboard();
-  const ships = test.placeShips();
+  const player1 = Gameboard();
+  player1.placeShips();
+  const player1AttackArray = player1.yourAttacks;
+  const player2 = Gameboard();
+  player2.placeShips();
+  const player2AttackArray = player2.yourAttacks;
   return (
     <div className="App">
       <Board 
       message="I'm board"
-      ship1={ships[0].type}
-      ship2={ships[1].type}
-      ship3={ships[2].type}
-      ship4={ships[3].type}
-      ship5={ships[4].type}/>
+      player1attacks={player1AttackArray}
+      player2attacks={player2AttackArray}/>
     </div>
   );
 }
