@@ -1,19 +1,25 @@
 import Gameboard from './models/Gameboard'
+import Player from './models/Player'
 import Board from './views/Board';
+import { useState } from 'react'
 
 function App() {
-  const player1 = Gameboard();
-  player1.placeShips();
-  const player1AttackArray = player1.yourAttacks;
-  const player2 = Gameboard();
-  player2.placeShips();
-  const player2AttackArray = player2.yourAttacks;
+  const gameboard = Gameboard();
+  const player = Player();
+  const [ships, setShips] = useState(gameboard.placeShips());
+  const [attackGrid, setAttackGrid] = useState(gameboard.yourAttacks);
+
+  const turn = function(playerInput) {
+    const target = (playerInput) ? player.getPlayerAttackTarget(playerInput) : player.getComputerAttackTarget();
+    gameboard.receiveAttack(target);
+    setAttackGrid(gameboard.yourAttacks);
+    console.log(gameboard.isGameOver());
+  }
   return (
     <div className="App">
       <Board 
-      message="I'm board"
-      player1attacks={player1AttackArray}
-      player2attacks={player2AttackArray}/>
+        attackGrid={attackGrid}
+        getPlayerInput={turn} />
     </div>
   );
 }

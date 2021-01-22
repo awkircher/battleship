@@ -44,11 +44,15 @@ const Gameboard = function() {
         rows.forEach((row) => {
             for (let i = 0; i <= max; i++) {
                 positions = row.slice(i, i + size);
-                if (positions.includes(shipTypes[0][0]) || 
-                    positions.includes(shipTypes[1][0]) || 
-                    positions.includes(shipTypes[2][0]) || 
-                    positions.includes(shipTypes[3][0]) || 
-                    positions.includes(shipTypes[4][0])) {
+                if (positions.includes(shipTypes[0][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[1][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[2][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[3][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[4][0])) {
                     continue;
                 } else {
                     available.push(positions)
@@ -57,9 +61,11 @@ const Gameboard = function() {
         })
         // Assign the first available to coordinates and mark those positions.
         const coordinates = available.shift();
-        const isStartPositionInyourShips = (item) => item === coordinates[0];
-        const startPositionInyourShips = yourShips.findIndex(isStartPositionInyourShips);
-        yourShips.fill(type, startPositionInyourShips, startPositionInyourShips + size);
+        for (let i = 0; i < coordinates.length; i++) {
+            const isMatch = (value) => value === coordinates[i];
+            const indexOfMatch = yourShips.findIndex(isMatch);
+            yourShips[indexOfMatch] = type;
+        }
         return coordinates;
     }
 
@@ -89,11 +95,15 @@ const Gameboard = function() {
         columns.forEach((column) => {
             for (let i = 0; i <= max; i++) {
                 positions = column.slice(i, i + size);
-                if (positions.includes(shipTypes[0][0]) || 
-                    positions.includes(shipTypes[1][0]) || 
-                    positions.includes(shipTypes[2][0]) || 
-                    positions.includes(shipTypes[3][0]) || 
-                    positions.includes(shipTypes[4][0])) {
+                if (positions.includes(shipTypes[0][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[1][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[2][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[3][0])) {
+                    continue;
+                } else if (positions.includes(shipTypes[4][0])) {
                     continue;
                 } else {
                     available.push(positions)
@@ -102,9 +112,11 @@ const Gameboard = function() {
         })
         // Assign the first available to coordinates and mark those positions.
         const coordinates = available.shift();
-        const isMatch = (value) => value === coordinates;
-        const indexOfMatch = yourShips.findIndex(isMatch);
-        yourShips[indexOfMatch] = type;
+        for (let i = 0; i < coordinates.length; i++) {
+            const isMatch = (value) => value === coordinates[i];
+            const indexOfMatch = yourShips.findIndex(isMatch);
+            yourShips[indexOfMatch] = type;
+        }
         return coordinates;
     }
 
@@ -146,13 +158,14 @@ const Gameboard = function() {
             const ship = Ship(type, coordinates, size);
             activeGame.push(ship);
         });
+        console.table(activeGame);
         return activeGame;
     }
 
     const isGameOver = function() {
         let sunkShips = [];
         activeGame.forEach(ship => {
-            if (ship.isSunk === true) {
+            if (ship.isSunk() === true) {
                 sunkShips.push(true)
             }
         })

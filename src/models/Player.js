@@ -2,9 +2,7 @@ import shuffleArray from '../utilities/shuffle.js'
 
 const Player = function() {
     // This can be called in order to get a target from the computer player.
-    // The other player will input their desired target directly from the DOM, 
-    // which will then go to the Gameboard.receiveAttack() method.
-    const getAttackTarget = function(previousAttacks) {
+    const getComputerAttackTarget = function(previousAttacks) {
         const unattacked = [];
         previousAttacks.forEach(coordinate => {
             if (coordinate !== 'hit' && coordinate !== 'miss') {
@@ -12,9 +10,17 @@ const Player = function() {
             }
         });
         shuffleArray(unattacked);
-        return unattacked.pop();
+        const attackTarget = unattacked.pop();
+        return attackTarget;
     }
-    return { getAttackTarget }
+    // This unpacks Player 1's event received from the DOM.
+    const getPlayerAttackTarget = function(event) {
+        event.preventDefault();
+        const elem = event.target;
+        const attackTarget = elem.dataset.coordinate;
+        return attackTarget;
+    }
+    return { getComputerAttackTarget, getPlayerAttackTarget }
 }
 
 export default Player
