@@ -1,5 +1,6 @@
-import Gameboard from './Components/Gameboard'
+import { Gameboard } from './Components/Gameboard'
 import { useState } from 'react'
+import './App.css'
 
 function App() {
   const [turn, setTurn] = useState(0);

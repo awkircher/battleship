@@ -1,8 +1,9 @@
-import Ship from '../Models/Ship'
-import shuffleArray from '../Utilities/shuffle.js'
+import { Ship } from '../Models/Ship'
+import { shuffleArray } from '../Utilities/shuffle.js'
 import { useState, useEffect } from 'react'
+import { Score } from "./Score";
 
-const Gameboard = function(props) {
+export const Gameboard = function(props) {
     const shipTypes = [
         ['Carrier', 5], 
         ['Battleship', 4], 
@@ -130,7 +131,7 @@ const Gameboard = function(props) {
             // Return the coordinates to be used in creating your Ship object.
             return coordinates;
         }
-        // Create ships in a different order each game.
+        // Create Ships in a different order each game.
         shuffleArray(shipTypes);
         const ships = [];
         shipTypes.forEach(shipType => {
@@ -156,7 +157,8 @@ const Gameboard = function(props) {
         }
     }
 
-    // Takes a single coordinate, checks if that matches a ship, and updates the ship accordingly.
+    // Takes a single coordinate, checks if that is part of a ship, and updates the ship accordingly.
+    // Then, lets App know the turn is over.
     const receiveAttack = function(coords) {
         const current = targets.slice(0);
         let hit;
@@ -178,15 +180,15 @@ const Gameboard = function(props) {
     }
 
     // Create a div for each potential attack target.
-    const displayAttacks = targets.map((attack, index) =>
+    const displayAttacks = targets.map((coords, index) =>
         <button 
-            key={attack.toString() + index} 
-            data-coordinate={attack}
+            key={coords.toString() + index} 
+            data-coordinate={coords}
             onClick={(event) => {
                 event.preventDefault();
                 const elem = event.target;
                 const attackTarget = elem.dataset.coordinate;
-                receiveAttack(attackTarget);}}>{props.currentPlayer} {attack}</button>
+                receiveAttack(attackTarget);}}>{props.currentPlayer} {coords}</button>
     );
 
     useEffect(() => {
@@ -203,16 +205,19 @@ const Gameboard = function(props) {
     if (visibility) {
         return (
             <div>
-                <div>
+                <div className="grid">
                     {displayAttacks}
                 </div>
+                    <Score 
+                        status={ships}
+                    />
             </div>
         )
     } else {
         return (
-            <div>The invisible board</div>
+            <Score 
+                status={ships}
+            />
         )
     }
 }
-
-export default Gameboard
