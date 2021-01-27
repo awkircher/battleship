@@ -1,7 +1,7 @@
-.grid {
-  width: 600px;
-}
-
-.grid button {
-  width: 100px;
+.App {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(64px, 92px) [col-start]);
+    grid-template-rows: repeat(auto-fit, 200px [row-start]);
+    justify-content: center;
+    align-content: center;
 }

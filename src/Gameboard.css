@@ -1,0 +1,32 @@
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(64px, 92px) [col-start]);
+  grid-column: 1 / span 6;
+  grid-row: 1 / span 3;
+}
+
+.grid {
+  grid-column:  1 / span all;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(64px, 92px) [col-start]);
+}
+
+.grid button {
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.grid.active {
+  z-index: 1;
+  opacity: 1;
+}
+
+.grid.hidden {
+  z-index: 0;
+  opacity: 0;
+}
+
+[data-coordinate="hit"], [data-coordinate="miss"] {
+  cursor: not-allowed;
+  pointer-events: none;
+}

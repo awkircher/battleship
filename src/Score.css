@@ -1,0 +1,54 @@
+.hits {
+    display: flex;
+  }
+  
+  .hits div {
+    width: 16px;
+    height: 48px;
+    border: thin solid black;
+  }
+  
+  .hits [data-hit="false"] {
+    background: lightgray;
+  }
+  
+  .hits [data-hit="true"] {
+    background: darkgrey;
+  }
+  
+  [data-sunk="true"] .hits div {
+    background: red;
+  }
+  
+  .status h1 {
+    font-size: 16px;
+  }
+
+  #x, #y {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #x { 
+    grid-column-end: col-start 1;
+  }
+
+  #y {
+    grid-column-end: col-start 6;
+  }
+  
+  [data-ship="Carrier"] {
+    order: 1;
+  }
+  [data-ship="Battleship"] {
+    order: 2;
+  }
+  [data-ship="Cruiser"] {
+    order: 3;
+  }
+  [data-ship="Submarine"] {
+    order: 4;
+  }
+  [data-ship="Destroyer"] {
+    order: 5;
+  }

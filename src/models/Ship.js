@@ -1,13 +1,13 @@
 // Returns an individual Ship object with methods.
 export const Ship = function(type, coordinates, size) {
-    let targets = [];
-    // Initially all targets are not hit, so empty array. 
     // These methods to be called if Gameboard finds an attack corresponds to a target.
-    const hit = function() {
-        targets.push(true);
+    const hit = function(key) {
+        this.coordinates[key] = true
     }
     const isSunk = function() {
-        return (targets.length === size)
+        const hitTargets = Object.values(this.coordinates);
+        const isTrue = (value) => value === true;
+        return hitTargets.every(isTrue)
     }
-    return {type, coordinates, targets, hit, isSunk}
+    return {type, coordinates, hit, isSunk}
 }

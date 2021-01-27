@@ -1,7 +1,8 @@
 import { Ship } from '../Models/Ship'
 import { shuffleArray } from '../Utilities/shuffle.js'
 import { useState, useEffect } from 'react'
-import { Score } from "./Score";
+import { Score } from './Score'
+import '../Gameboard.css'
 
 export const Gameboard = function(props) {
     const shipTypes = [
@@ -20,19 +21,17 @@ export const Gameboard = function(props) {
         'A6','B6','C6','D6','E6','F6',
     ]);
     const [ships, setShips] = useState([]);
-    // placeShips() populates shipPlacement with Ship objects.
+    // placeShips() populates `ships` with Ship objects.
     // [
     //   {
     //     type:Destroyer,
-    //     coordinates:[A1,B1], 
-    //     targets:[false,false],
+    //     coordinates: { A1: false, B1: false }
     //     hit: hit(),
     //     isSunk: isSunk(),
     //   },
     //   {
     //     type:Cruiser,
-    //     coordinates:[B2,C2,D2], 
-    //     targets:[false,false,false],
+    //     coordinates: { B2: false, C2: false, D2: false },
     //     hit: hit(),
     //     isSunk: isSunk(),
     //    }
@@ -121,14 +120,20 @@ export const Gameboard = function(props) {
                     }
                 })
             }
-            // Assign the first item in `available` to `coordinates` and mark those positions in grid.
-            const coordinates = available.shift();
-            for (let i = 0; i < coordinates.length; i++) {
-                const isMatch = (value) => value === coordinates[i];
+            // Assign the first item in `available` to `selectedAvailable` and mark those positions in grid.
+            const selectedAvailable = available.shift();
+            for (let i = 0; i < selectedAvailable.length; i++) {
+                const isMatch = (value) => value === selectedAvailable[i];
                 const indexOfMatch = grid.findIndex(isMatch);
                 grid[indexOfMatch] = type;
             }
             // Return the coordinates to be used in creating your Ship object.
+            const coordinates = {};
+            // Add 'false' to each, to indicate that position is not hit.
+            selectedAvailable.forEach(position => {
+                coordinates[position] = false;
+            })
+            console.log(coordinates);
             return coordinates;
         }
         // Create Ships in a different order each game.
@@ -153,19 +158,25 @@ export const Gameboard = function(props) {
             }
         })
         if (sunkShips.length === 5) {
-            props.gameDidEnd();
+            props.action({type: 'gameover'});
         }
     }
 
     // Takes a single coordinate, checks if that is part of a ship, and updates the ship accordingly.
-    // Then, lets App know the turn is over.
+    // Updates state, then lets App know the turn is over.
     const receiveAttack = function(coords) {
         const current = targets.slice(0);
         let hit;
-        ships.forEach(ship => {
-            if (ship.coordinates.includes(coords)) {
-                ship.hit()
+        ships.forEach((ship) => {
+            const keys = Object.keys(ship.coordinates);
+            if (keys.includes(coords)) {
+                ship.hit(coords)
                 hit = true
+                if (ship.isSunk()) {
+                    props.action({type: 'sunk', payload: ship.type})
+                } else {
+                    props.action({type: 'hit', payload: ship.type})
+                }
             }
         })
         const isMatch = (value) => value === coords;
@@ -174,9 +185,10 @@ export const Gameboard = function(props) {
             current[indexOfMatch] = 'hit';
         } else {
             current[indexOfMatch] = 'miss';
+            props.action({type: 'miss', payload: coords})
         }
         setTargets(current);
-        props.turnDidEnd();
+        window.setTimeout(props.action, 2*1000, {type: 'turnOver'})
     }
 
     // Create a div for each potential attack target.
@@ -188,7 +200,12 @@ export const Gameboard = function(props) {
                 event.preventDefault();
                 const elem = event.target;
                 const attackTarget = elem.dataset.coordinate;
-                receiveAttack(attackTarget);}}>{props.currentPlayer} {coords}</button>
+                props.action({type: 'attack', payload: attackTarget})
+                window.setTimeout(receiveAttack, 1*1000, attackTarget)
+            }}
+        >
+            {coords}
+        </button>
     );
 
     useEffect(() => {
@@ -200,24 +217,27 @@ export const Gameboard = function(props) {
         isGameOver();
     })
 
-    const visibility = props.visibility;
+    const isVisible = props.isVisible;
 
-    if (visibility) {
+    if (isVisible) {
         return (
-            <div>
-                <div className="grid">
-                    {displayAttacks}
-                </div>
+            <div className="gameboard">
+                <div className="grid active">{displayAttacks}</div>
                     <Score 
                         status={ships}
+                        id={props.id}
                     />
             </div>
         )
     } else {
         return (
-            <Score 
-                status={ships}
-            />
+            <div className="gameboard">
+                <div className="grid hidden">{displayAttacks}</div>
+                <Score 
+                    status={ships}
+                    id={props.id}
+                />
+            </div>
         )
     }
 }
