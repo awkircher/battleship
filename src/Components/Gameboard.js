@@ -194,15 +194,9 @@ export const Gameboard = function(props) {
     // Create a div for each potential attack target.
     const displayAttacks = targets.map((coords, index) =>
         <button 
-            key={coords.toString() + index} 
+            key={coords.toString() + index}
+            className={index} 
             data-coordinate={coords}
-            onClick={(event) => {
-                event.preventDefault();
-                const elem = event.target;
-                const attackTarget = elem.dataset.coordinate;
-                props.action({type: 'attack', payload: attackTarget})
-                window.setTimeout(receiveAttack, 1*1000, attackTarget)
-            }}
         >
             {coords}
         </button>
@@ -222,7 +216,18 @@ export const Gameboard = function(props) {
     if (isVisible) {
         return (
             <div className="gameboard">
-                <div className="grid active">{displayAttacks}</div>
+                <div 
+                    className="grid active"
+                    onClick={(event) => {
+                        event.preventDefault();
+                        const parent = event.currentTarget;
+                        const elem = event.target;
+                        parent.classList.add('animate');
+                        const attackTarget = elem.dataset.coordinate;
+                        props.action({type: 'attack', payload: attackTarget})
+                        window.setTimeout(receiveAttack, 1*2000, attackTarget)
+                    }}
+                >{displayAttacks}</div>
                     <Score 
                         status={ships}
                         id={props.id}

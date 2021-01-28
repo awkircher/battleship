@@ -30,3 +30,51 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+/* ANIMATION CODE */
+@keyframes turnBlue {
+  from {background-color: initial;}
+  to {background-color: blue;}
+}
+
+/* group1 */
+.animate [class="0"], .animate [class="4"],
+.animate [class="8"], .animate [class="12"], 
+.animate [class="16"], .animate [class="20"], 
+.animate [class="24"], .animate [class="28"]
+.animate [class="32"], .animate [class="35"] {
+  background-color: initial;
+  animation-name: turnBlue;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+/* group2 */
+.animate [class="1"], .animate [class="5"], 
+.animate [class="9"], .animate [class="13"], 
+.animate [class="17"], .animate [class="21"], 
+.animate [class="25"], .animate [class="29"]
+.animate [class="33"] {
+  background-color: initial;
+  animation-name: turnBlue;
+  animation-delay: 0.5s;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+/* group3 */
+.animate [class="2"], .animate [class="3"], 
+.animate [class="6"], .animate [class="7"], 
+.animate [class="10"], .animate [class="11"], 
+.animate [class="14"], .animate [class="15"]
+.animate [class="18"], .animate [class="19"],
+.animate [class="22"], .animate [class="23"],
+.animate [class="26"], .animate [class="27"],
+.animate [class="30"], .animate [class="31"],
+.animate [class="34"] {
+  background-color: initial;
+  animation-name: turnBlue;
+  animation-delay: 1s;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
