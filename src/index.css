@@ -1,8 +1,22 @@
+@font-face {
+  font-family: 'Share Tech Mono';
+  src: local('Share Tech Mono'), url(./fonts/ShareTechMono-Regular.ttf) format('truetype');
+}
+
+:root {
+  --light-blue: #93C2DC;
+  --blue: #60A2C7;
+  --dark-blue:#3A81A9;
+  --near-black: #0A1C27;
+  --white:#ffffff;
+  --yellow: #E5CC44;
+  --red: #DC3737;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'Share Tech Mono', monospace;
+  -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--blue);
 }

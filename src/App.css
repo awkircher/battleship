@@ -1,7 +1,8 @@
 .App {
+    padding-top: 24px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(64px, 92px) [col-start]);
-    grid-template-rows: repeat(auto-fit, 200px [row-start]);
+    grid-template-columns: repeat(auto-fit, minmax(48px, 64px) [col-start]);
+    grid-template-rows: repeat(auto-fit, minmax(48px, 64px) [row-start]);
     justify-content: center;
     align-content: center;
 }

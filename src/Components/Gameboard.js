@@ -188,7 +188,7 @@ export const Gameboard = function(props) {
             props.action({type: 'miss', payload: coords})
         }
         setTargets(current);
-        window.setTimeout(props.action, 2*1000, {type: 'turnOver'})
+        window.setTimeout(props.action, 3*1000, {type: 'turnOver'})
     }
 
     // Create a div for each potential attack target.
@@ -225,7 +225,7 @@ export const Gameboard = function(props) {
                         parent.classList.add('animate');
                         const attackTarget = elem.dataset.coordinate;
                         props.action({type: 'attack', payload: attackTarget})
-                        window.setTimeout(receiveAttack, 1*2000, attackTarget)
+                        window.setTimeout(receiveAttack, 1*1000, attackTarget)
                     }}
                 >{displayAttacks}</div>
                     <Score 

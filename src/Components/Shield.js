@@ -4,8 +4,8 @@ export const Shield = function(props) {
     if (props.isUp) {
         return (
             <div className="Shield">
-                <h1>Shield's up!</h1>
-                <button onClick={() => {props.action({type: 'shieldDismissed'})}}>Dismiss</button>
+                <h1>{props.message}</h1>
+                <button onClick={() => {props.action({type: 'shieldDismissed'})}}>READY</button>
             </div>
         )
     } else {

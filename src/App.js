@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   const initialState = {
     message:`Let's play Battleship!`, 
-    turn: 0,
+    turn: 1,
     shielded: false,
   };
 
@@ -18,20 +18,20 @@ function App() {
   const reducer = function(state, action) {
     switch (action.type) {
       case 'turnOver':
-        const nextTurn = (state.turn === 0) ? 1 : 0;
-        return {message: 'Shield!', turn: nextTurn, shielded: true}
+        const nextTurn = (state.turn === 1) ? 2 : 1;
+        return {message: 'Ready Player ' + nextTurn + '?', turn: nextTurn, shielded: true}
       case 'shieldDismissed':
-        return {message: 'Awaiting attack target...', turn: state.turn, shielded: false}
+        return {message: 'Awaiting your command...', turn: state.turn, shielded: false}
       case 'attack':
-        return {message: 'Attack launched on ' + action.payload, turn: state.turn, shielded: false};
+        return {message: 'Launching attack on ' + action.payload + ' ...', turn: state.turn, shielded: false};
       case 'hit':
-        return {message: action.payload + ' hit', turn: state.turn, shielded: false};
+        return {message: action.payload + ' HIT!', turn: state.turn, shielded: false};
       case 'miss':
-        return {message: action.payload + ' was a miss', turn: state.turn, shielded: false};
+        return {message: 'Attack was a MISS!', turn: state.turn, shielded: false};
       case 'sunk':
-        return {message: action.payload + ' has been sunk', turn: state.turn, shielded: false};
+        return {message: action.payload + ' SUNK!', turn: state.turn, shielded: false};
       case 'gameover':
-        return {message: 'game over', turn: state.turn, shielded: false};
+        return {message: 'Game Over', turn: state.turn, shielded: false};
       case 'playAgain':
         return init(initialState);
       default:
@@ -41,16 +41,17 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState, init)
 
-  const isVisible = state.turn === 0;
+  const isVisible = state.turn === 1;
 
   return (
     <div className="App">
       <Shield 
         isUp={state.shielded}
+        message={state.message}
         action={dispatch}
       />
       <Message 
-        content={state.message}
+        message={state.message}
       />
       <Gameboard
         isVisible={isVisible}

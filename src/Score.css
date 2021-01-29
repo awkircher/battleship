@@ -1,54 +1,78 @@
-.hits {
-    display: flex;
-  }
+.Score .ship .status .hits {
+    display: grid;
+    grid-template-columns: repeat(5, 16px);
+    grid-column-gap: 3px;
+}
   
-  .hits div {
-    width: 16px;
-    height: 48px;
-    border: thin solid black;
-  }
-  
-  .hits [data-hit="false"] {
-    background: lightgray;
-  }
-  
-  .hits [data-hit="true"] {
-    background: darkgrey;
-  }
-  
-  [data-sunk="true"] .hits div {
-    background: red;
-  }
-  
-  .status h1 {
-    font-size: 16px;
-  }
+.Score .ship .status .hits div {
+  width: 16px;
+  height: 24px;
+}
 
-  #x, #y {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.hits [data-hit="false"] {
+  background-color: var(--dark-blue);
+}
 
-  #x { 
-    grid-column-end: col-start 1;
-  }
+[data-sunk="true"] .hits div, .hits [data-hit="true"] {
+  background-color: var(--red);
+}
 
-  #y {
-    grid-column-end: col-start 6;
-  }
+label {
+  align-self: flex-end;
+  padding-left: 90px;
+}
+
+.Score .ship .status .type, label {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+#x.Score, #y.Score {
+  display: grid;
+  grid-template-rows: repeat(5, 24px);
+  grid-row-gap: 8px;
+}
+
+#x.Score { 
+  grid-column-end: col-start 1;
+}
   
-  [data-ship="Carrier"] {
-    order: 1;
-  }
-  [data-ship="Battleship"] {
-    order: 2;
-  }
-  [data-ship="Cruiser"] {
-    order: 3;
-  }
-  [data-ship="Submarine"] {
-    order: 4;
-  }
-  [data-ship="Destroyer"] {
-    order: 5;
-  }
+#y.Score {
+  grid-column-end: col-start 4;
+}
+
+#x.Score .ship .status, #y.Score .ship .status {
+  text-align: right;
+  display: grid;
+  grid-template-columns: 80px 92px;
+  grid-column-gap: 10px;
+  align-items: center;
+}
+
+#y.Score .ship .status .type {
+  visibility: hidden;
+}
+
+#x.Score .ship .status .type {
+  grid-column-start: 1;
+}
+
+#x.Score .ship .status .hits {
+  grid-column-start: 2;
+}
+
+[data-ship="Carrier"] {
+  order: 1;
+}
+[data-ship="Battleship"] {
+  order: 2;
+}
+[data-ship="Cruiser"] {
+  order: 3;
+}
+[data-ship="Submarine"] {
+  order: 4;
+}
+[data-ship="Destroyer"] {
+  order: 5;
+}
