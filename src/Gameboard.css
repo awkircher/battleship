@@ -10,6 +10,7 @@
 .grid {
   grid-column:  1 / span all;
   display: grid;
+  gap: 0;
   grid-template-columns: repeat(6, minmax(48px, 64px) [col-start]);
   grid-template-rows: repeat(6, minmax(48px, 64px) [row-start]);
   text-transform: uppercase;
@@ -19,6 +20,7 @@
 
 .grid button {
   box-sizing: border-box;
+  margin: 0;
   padding: 8px;
   background-color: var(--light-blue);
   border: 2px solid var(--blue);
@@ -62,7 +64,7 @@
   to 
   {
     background-color: var(--near-black);
-    border-color: var(--near-black);
+    border: 2px solid var(--near-black);
   }
 }
 
