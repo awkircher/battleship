@@ -1,4 +1,4 @@
-import '../Score.css'
+import './Score.css'
 
 export const Score = function(props) {
     const playerLabel = (props.id === 'y') ? "Player 1" : "Player 2";

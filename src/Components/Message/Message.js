@@ -1,7 +1,7 @@
-import '../Message.css'
-import hitImg from '../images/hit.gif'
-import wavesImg from '../images/waves.gif'
-import sunkImg from '../images/sunk.gif'
+import './Message.css'
+import hitImg from '../../images/hit.gif'
+import wavesImg from '../../images/waves.gif'
+import sunkImg from '../../images/sunk.gif'
 
 export const Message = function(props) {
     const hit = 'HIT';

@@ -20,10 +20,11 @@
 
 .grid button {
   box-sizing: border-box;
-  margin: 0;
-  padding: 8px;
+  margin: 8px;
+  padding: 0px;
   background-color: var(--light-blue);
   border: 2px solid var(--blue);
+  border-image: url('../../images/border_default.png') 30 30 / 40px 40px / 4px round space;
   cursor: pointer;
   text-transform: uppercase;
   font-family: inherit;
@@ -51,21 +52,35 @@
 }
 
 .grid button[data-coordinate="hit"] {
-  background-color: var(--red);
+  border: 2px solid var(--blue);
+  border-image: url('../../images/border_hit.png') 30 30 / 40px 40px / 4px round space;
+  background-color: var(--dark-red);
 }
 
 .grid button[data-coordinate="miss"] {
+  border: 2px solid var(--blue);
+  border-image: url('../../images/border_miss.png') 30 30 / 40px 40px / 4px round space;
   background-color: var(--blue);
 }
 
 /* ANIMATION CODE */
 @keyframes turnBlue {
-  from {background-color: var(--light-blue);}
+  from {
+    background-color: var(--light-blue);
+  }
   to 
   {
     background-color: var(--near-black);
-    border: 2px solid var(--near-black);
+    border-image: none;
+    border: none;
   }
+}
+
+/* parent container */
+.animate {
+  animation-name: turnBlue;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
 }
 
 /* group1 */

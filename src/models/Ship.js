@@ -1,5 +1,5 @@
 // Returns an individual Ship object with methods.
-export const Ship = function(type, coordinates, size) {
+export const Ship = function(type, coordinates) {
     // These methods to be called if Gameboard finds an attack corresponds to a target.
     const hit = function(key) {
         this.coordinates[key] = true

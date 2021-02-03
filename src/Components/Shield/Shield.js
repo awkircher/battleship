@@ -1,4 +1,4 @@
-import '../Shield.css'
+import './Shield.css'
 
 export const Shield = function(props) {
     if (props.isUp) {
