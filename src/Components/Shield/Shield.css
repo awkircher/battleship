@@ -1,4 +1,4 @@
-.Shield {
+.Shield, .startScreen, .gameOver {
     z-index: 3;
     width: 100%;
     height: 100%;
@@ -7,21 +7,104 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    background: #0A1C27;
     color: #93C2DC;
+}
+
+/* ANIMATION CODE */
+@keyframes shimmer {
+    from {
+    background-image: url('../../images/start1.svg');
+    }
+    to 
+    {
+    background-image: url('../../images/start2.svg');
+    }
+  }
+
+@keyframes enterFromTop {
+    0% {
+        opacity: 1;
+        transform: translateY(-300px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes enterFromBottom {
+    0% {
+        opacity: 1;
+        transform: translateY(300px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.startScreen {
+    background-color: var(--near-black);
+    background-image: url('../../images/start1.svg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    animation-name: shimmer;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    grid-template-rows: 1fr 1.25fr;
+    align-items: flex-end;
+    color: var(--near-black);
+    text-align: center;
+}
+
+.startScreen h1 {
+    opacity: 0;
+    animation-name: enterFromTop;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.startScreen button {
+    opacity: 0;
+    animation-name: enterFromBottom;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    width: min-content;
+    justify-self: center;
+}
+
+.Shield {
+    background: var(--near-black);
 }
 
 .Shield h1 {
     align-self: flex-end;
 }
 
-.Shield button {
-    background: #E5CC44;
-    color: #0A1C27;
+.Shield button, .startScreen button {
+    background: linear-gradient(180deg, #FFED8D 50%, #FFE556 50.01%);
+    color: var(--near-black);
+    box-shadow: 
+        0px 3px 0px var(--white), 
+        0px -3px 0px var(--white), 
+        3px 0px 0px var(--white), 
+        -3px 0px 0px var(--white);
     align-self: flex-start;
     font-family: inherit;
     padding: 8px;
     font-size: 24px;
-    border: none;
+    border:3px solid var(--yellow);
     cursor: pointer;
+}
+
+.Shield button:hover, .startScreen button:hover {
+    background: linear-gradient(180deg, #FFE556 50%, #FFED8D 50.01%);
+    border-color: var(--dark-yellow)
 }

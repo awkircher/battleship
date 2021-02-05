@@ -5,16 +5,28 @@
 }
   
 .Score .ship .status .hits div {
-  width: 16px;
+  width: 12px;
   height: 24px;
 }
 
 .hits [data-hit="false"] {
   background-color: var(--dark-blue);
+  border: 1px solid var(--blue);
+  box-shadow: 
+    0px 1px 0px var(--near-black), 
+    0px -1px 0px var(--near-black), 
+    1px 0px 0px var(--near-black), 
+    -1px 0px 0px var(--near-black);
 }
 
 [data-sunk="true"] .hits div, .hits [data-hit="true"] {
-  background-color: var(--red);
+  background-color: var(--dark-red);
+  border: 1px solid var(--red);
+  box-shadow: 
+    0px 1px 0px var(--near-black), 
+    0px -1px 0px var(--near-black), 
+    1px 0px 0px var(--near-black), 
+    -1px 0px 0px var(--near-black);
 }
 
 label {
@@ -38,7 +50,7 @@ label {
 }
   
 #y.Score {
-  grid-column-end: col-start 4;
+  grid-column-end: col-start 3;
 }
 
 #x.Score .ship .status, #y.Score .ship .status {

@@ -7,7 +7,7 @@ import './App.css';
 const initialState = {
   message:`Let's play Battleship!`, 
   turn: 1,
-  shielded: false,
+  shielded: true,
 };
 
 export function init(initialState) {

@@ -24,7 +24,11 @@
   padding: 0px;
   background-color: var(--light-blue);
   border: 2px solid var(--blue);
-  border-image: url('../../images/border_default.png') 30 30 / 40px 40px / 4px round space;
+  box-shadow: 
+    0px 2px 0px var(--near-black), 
+    0px -2px 0px var(--near-black), 
+    2px 0px 0px var(--near-black), 
+    -2px 0px 0px var(--near-black);
   cursor: pointer;
   text-transform: uppercase;
   font-family: inherit;
@@ -52,14 +56,23 @@
 }
 
 .grid button[data-coordinate="hit"] {
-  border: 2px solid var(--blue);
-  border-image: url('../../images/border_hit.png') 30 30 / 40px 40px / 4px round space;
+  border: 2px solid var(--red);
+  box-shadow: 
+    0px 2px 0px var(--near-black), 
+    0px -2px 0px var(--near-black), 
+    2px 0px 0px var(--near-black), 
+    -2px 0px 0px var(--near-black);
   background-color: var(--dark-red);
 }
 
 .grid button[data-coordinate="miss"] {
-  border: 2px solid var(--blue);
-  border-image: url('../../images/border_miss.png') 30 30 / 40px 40px / 4px round space;
+  border: 2px solid var(--light-blue);
+  box-shadow: 
+    0px 2px 0px var(--near-black), 
+    0px -2px 0px var(--near-black), 
+    2px 0px 0px var(--near-black), 
+    -2px 0px 0px var(--near-black);
+  /* border-image: url('../../images/border_miss.png') 30 30 / 40px 40px / 4px round space; */
   background-color: var(--blue);
 }
 
