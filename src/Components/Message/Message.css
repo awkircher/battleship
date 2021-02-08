@@ -1,14 +1,18 @@
 .Message {
-    z-index: 2;
+    z-index: 0;
     grid-row-start: 1;
+    grid-row-end: 5;
     grid-column-start: 1;
     grid-column-end: span 6;
-    height: fit-content;
     text-align: center;
     color: var(--near-black);
     display: grid;
     grid-template-rows: 48px 1fr;
     grid-row-gap: 18px;
+}
+
+.Message.topLevel {
+    z-index: 2;
 }
 
 .Message h1 {
@@ -18,6 +22,6 @@
 
 .Message img {
     object-fit: cover;
-    width: 100%;
     justify-self: stretch;
+    align-self: stretch;
 }

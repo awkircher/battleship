@@ -1,17 +1,12 @@
-# Building a game using test-driven development
+# Battleship
 
-This implementation of Battleship is an exercise in following test-driven development. The intended process is to write a unit test, write the code to make the unit test pass, and then continue on to writing the next unit test. 
+## Project goals:
+* Gain experience writing unit tests and testable code
+* Create a mobile-first design
+* Explore responsive design using CSS Grid
 
-## Testing spec
-
-The following test cases are meant to inform the actual unit tests written. Together they describe the full behavior of the game.
-
-### Ship spec
-* A position can only be hit once.
-* A ship with a length of x and exactly x hits is sunk.
-
-### Gameboard spec
-* Ships are created and placed in a letter column-numbered row coordinate system
-* A miss is recorded if the letter-number pair of the attack does not match a ship's coordinates
-* A hit is recorded if the letter-number pair of the attack matches an un-hit position on a ship
-* Total missed attacks are displayed to the player
+## Future improvements:
+* Broader test coverage for game states
+* Explore solutions to replace manual gameplay (screenshot testing)
+* Improve the UX of transitions between players and when a game ends
+* Expand design to be more responsive, not just mobile-first

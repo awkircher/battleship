@@ -9,21 +9,21 @@ export const Message = function(props) {
     const sunk = 'SUNK';
     if (props.message.includes(hit)) {
         return (
-            <div className="Message">
+            <div className="Message topLevel">
                 <h1>{props.message}</h1>
                 <img src={hitImg} alt="hit"></img>
             </div>
         )
     } else if (props.message.includes(miss)) {
         return (
-            <div className="Message">
+            <div className="Message topLevel">
                 <h1>{props.message}</h1>
                 <img src={wavesImg} alt="waves"></img>
             </div>
         )
     } else if (props.message.includes(sunk)) {
         return (
-            <div className="Message">
+            <div className="Message topLevel">
                 <h1>{props.message}</h1>
                 <img src={sunkImg} alt="sunk"></img>
             </div>

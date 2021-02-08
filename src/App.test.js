@@ -6,9 +6,9 @@ const initialState = {
     shielded: false,
   };
 const attackAction = {type: 'attack', payload: 'A1'}; 
-const hitAction = {type: 'hit', payload: 'Cruiser'};
+const hitAction = {type: 'hit', payload: {target:'Cruiser'}};
 const missAction = {type: 'miss', payload: 'A1'}
-const sunkAction = {type: 'sunk', payload: 'Cruiser'}
+const sunkAction = {type: 'sunk', payload: {target:'Cruiser'}}
 
 it('updates state for an attack', () => {
     const result = reducer(initialState, attackAction);
@@ -17,7 +17,7 @@ it('updates state for an attack', () => {
 
 it('updates state for a hit', () => {
     const result = reducer(initialState, hitAction);
-    expect(result).toHaveProperty('message', hitAction.payload + ' HIT!')
+    expect(result).toHaveProperty('message', hitAction.payload.target + ' HIT!')
 })
 
 it('updates state for a miss', () => {
@@ -27,5 +27,5 @@ it('updates state for a miss', () => {
 
 it('updates state for a sunk ship', () => {
     const result = reducer(initialState, sunkAction);
-    expect(result).toHaveProperty('message', sunkAction.payload + ' SUNK!')
+    expect(result).toHaveProperty('message', sunkAction.payload.target + ' SUNK!')
 })

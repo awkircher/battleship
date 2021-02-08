@@ -14,3 +14,26 @@ export const gridTemplate = [
     'A5','B5','C5','D5','E5','F5',
     'A6','B6','C6','D6','E6','F6',
 ];
+
+export const startingScore = [
+    {
+        type: 'Carrier',
+        coordinates: {'1': false, '2': false, '3': false, '4': false, '5': false}
+    },
+    {
+        type: 'Battleship',
+        coordinates: {'1': false, '2': false, '3': false, '4': false}
+    },
+    {
+        type: 'Cruiser',
+        coordinates: {'1': false, '2': false, '3': false}
+    },
+    {
+        type: 'Submarine',
+        coordinates: {'1': false, '2': false, '3': false}
+    },
+    {
+        type: 'Destroyer',
+        coordinates: {'1': false, '2': false}
+    }
+]

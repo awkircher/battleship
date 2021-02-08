@@ -1,7 +1,6 @@
 import { Ship } from '../../Models/Ship'
 import { shuffleArray } from '../../Utilities/shuffle.js'
 import { useState, useEffect } from 'react'
-import { Score } from '../Score/Score'
 import './Gameboard.css'
 import { shipTypes, gridTemplate } from '../../Utilities/constants'
 
@@ -64,7 +63,8 @@ export const utils = function() {
         const orientation = getOrientation();
         const allPositions = (orientation === 'horizontal') ? getRows(grid, 6) : getColumns(grid, 6);
         const availablePositions = getAvailable(allPositions, 6, size)
-        const selectedPosition = availablePositions.shift();
+        const shuffledOptions = shuffleArray(availablePositions.slice())
+        const selectedPosition = shuffledOptions.shift();
         const coordinates = {};
         // Add 'false' to each, to indicate that position is not hit.
         selectedPosition.forEach(position => {
@@ -108,6 +108,22 @@ export const Gameboard = function(props) {
 
     const [ships, setShips] = useState([]);
 
+    /* placeShips() fills the `ships` state array with Ship objects. For example: 
+    [
+        {
+            type: 'Destroyer'
+            coordinates: {'A1': false, 'B1': false}
+            hit: hit();
+            isSunk: isSunk();
+        }
+        {
+            type: 'Cruiser'
+            coordinates: {'A2': false, 'B2': false, 'C2': false}
+            hit: hit();
+            isSunk: isSunk();
+        }
+        ...
+    ] */
     const placeShips = function() {
         let grid = gridTemplate.slice();
         const ships = [];
@@ -144,12 +160,12 @@ export const Gameboard = function(props) {
             const ship = ships[targetedShip.index];
             ship.hit(coords);
             if (ship.isSunk()) {
-                props.action({type: 'sunk', payload: ship.type})
+                props.action({type: 'sunk', payload: {target: ship.type, status: ships}})
             } else {
-                props.action({type: 'hit', payload: ship.type})
+                props.action({type: 'hit', payload: {target: ship.type, status: ships}})
             }
         } else {
-            props.action({type: 'miss', payload: coords})
+            props.action({type: 'miss'})
         }
         setTargets(utils.updateTargets(targets.slice(), targetedShip.hit, coords));
         window.setTimeout(props.action, 3*1000, {type: 'turnOver'})
@@ -196,20 +212,12 @@ export const Gameboard = function(props) {
                         }
                     }}
                 >{displayAttacks}</div>
-                    <Score 
-                        status={ships}
-                        id={props.id}
-                    />
             </div>
         )
     } else {
         return (
             <div className="gameboard">
                 <div className="grid hidden">{displayAttacks}</div>
-                <Score 
-                    status={ships}
-                    id={props.id}
-                />
             </div>
         )
     }
