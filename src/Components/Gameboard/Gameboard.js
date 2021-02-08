@@ -165,7 +165,7 @@ export const Gameboard = function(props) {
                 props.action({type: 'hit', payload: {target: ship.type, status: ships}})
             }
         } else {
-            props.action({type: 'miss'})
+            props.action({type: 'miss', payload: {target: coords, status: ships}})
         }
         setTargets(utils.updateTargets(targets.slice(), targetedShip.hit, coords));
         window.setTimeout(props.action, 3*1000, {type: 'turnOver'})

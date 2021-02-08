@@ -31,7 +31,8 @@ export const reducer = function(state, action) {
       const hitStatus = action.payload.status;
       return {message: hitTarget + ' HIT!', status: hitStatus, turn: state.turn, shielded: false};
     case 'miss':
-      return {message: 'Attack was a MISS!', status: state.status, turn: state.turn, shielded: false};
+      const shipStatus = action.payload.status;
+      return {message: 'Attack was a MISS!', status: shipStatus, turn: state.turn, shielded: false};
     case 'sunk':
       const sunkTarget = action.payload.target;
       const sunkStatus = action.payload.status;

@@ -8,8 +8,12 @@ export const Score = function(props) {
     useEffect(() => {
         if (props.player === 1) {
             setPlayer1(props.status)
+            console.log("I just updated setPlayer1 with")
+            console.table(props.status)
         } else {
             setPlayer2(props.status)
+            console.log("I just updated setPlayer2 with")
+            console.table(props.status)
         }
         // eslint-disable-next-line
     }, [props.player])
