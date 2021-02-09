@@ -7,6 +7,7 @@
 
 ## Future improvements:
 * Broader test coverage for game states
-* Explore solutions to replace manual gameplay (screenshot testing)
+* Explore solutions (e.g. screenshot testing) to replace manual gameplay testing
 * Improve the UX of transitions between players and when a game ends
 * Expand design to be more responsive, not just mobile-first
+* Additional 'chrome' on the main play screen
